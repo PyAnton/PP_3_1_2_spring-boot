@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <title>MySite</title>
+  </head>
+  <body>
+    <!--            header            -->
+    <div class="header-container">
+        <div class="header">
+            <div class="header-links">
+                <a id="createUser" class="header-link" href="#">Создать</a>
+                <a id="updateUser"  class="header-link" href="#">Обновить</a>
+                <a id="deleteUser"  class="header-link" href="#">Удалить</a>
+            </div>
+        </div>
+    </div>
+
+    <!--            Content            -->
+    <div class="flex-container">
+        <div class="table-container">
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                </tr>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.getId()}">null</td>
+                    <td th:text="${user.getFirstName()}">---</td>
+                    <td th:text="${user.getLastName()}">---</td>
+                    <td th:text="${user.getEmail()}">---</td>
+                </tr>
+            </table>
+        </div>
+        <div id="content" class="content">
+            <h5>Привет, выбери действие </h5>
+            <h5> в шапке!</h5>
+        </div>
+    </div>
+      
+
+
+
+    <!--            Footer            -->
+    <div class="footer">
+        <p>© 2023 Anton Ovsov. Task Kata Academy.</p>
+    </div>
+    
+
+    <!-- Optional JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>
