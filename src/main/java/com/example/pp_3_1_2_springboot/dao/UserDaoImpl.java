@@ -43,6 +43,14 @@ public class UserDaoImpl implements UserDao {
                 .setParameter("id", id)
                 .executeUpdate();
     }
+    @Override
+    public User findUserById(long id) {
+        List<User> users = getEntityManager()
+                .createQuery("SELECT u FROM User u WHERE u.id = :id", User.class)
+                .setParameter("id", id)
+                .getResultList();
+        return users.isEmpty() ? null : users.get(0);
+    }
 
     @Override
     @SuppressWarnings(value = "unchecked")

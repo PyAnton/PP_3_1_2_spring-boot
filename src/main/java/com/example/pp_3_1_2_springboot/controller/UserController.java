@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -34,8 +34,10 @@ public class UserController {
     }
 
     @PostMapping("/delete")
-    public String dellUser(@RequestParam(name = "deleteId") long deleteId) {
-        userService.dell(deleteId);
+    public String dellUser(@RequestParam(name = "deleteId") long deleteId, RedirectAttributes redirectAttributes) {
+        if(!userService.dell(deleteId)) {
+            redirectAttributes.addFlashAttribute("message", "ID not found!");
+        }
         return USERS_PAGE;
     }
 
@@ -43,13 +45,17 @@ public class UserController {
     public String updateUser(@RequestParam long updateId,
                              @RequestParam String updateFirstName,
                              @RequestParam String updateLastName,
-                             @RequestParam String updateEmail) {
-        userService.update(updateId, updateFirstName, updateLastName, updateEmail);
+                             @RequestParam String updateEmail,
+                             RedirectAttributes redirectAttributes) {
+        if(!userService.update(updateId, updateFirstName, updateLastName, updateEmail)) {
+            redirectAttributes.addFlashAttribute("message", "ID not found!");
+        }
         return USERS_PAGE;
     }
-    @GetMapping ("/static/content/{action}")
+
+    @GetMapping("/static/content/{action}")
     public String getStaticContent(@PathVariable String action) {
-        return "content/"+action+"_user";
+        return "content/" + action + "_user";
     }
 
 }
